@@ -1,0 +1,18 @@
+{
+  "name": "tasktracker-backend",
+  "version": "1.0.0",
+  "description": "Backend for TaskTracker using Express and MongoDB",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "Akshata",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.18.2",
+    "mongoose": "^7.0.0"
+  }
+}
