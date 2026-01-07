@@ -3,7 +3,6 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
-// Import Task model
 const Task = require("./models/task");
 
 const app = express();
@@ -12,12 +11,12 @@ const app = express();
 app.use(cors({ origin: "*" }));
 app.use(express.json());
 
-// ✅ Root route
+// Root route
 app.get("/", (req, res) => {
   res.send("Welcome to TaskTracker!");
 });
 
-// ✅ GET all tasks
+// GET all tasks
 app.get("/tasks", async (req, res) => {
   try {
     const tasks = await Task.find().sort({ createdAt: -1 });
@@ -27,10 +26,9 @@ app.get("/tasks", async (req, res) => {
   }
 });
 
-// ✅ POST create new task
+// POST create new task
 app.post("/tasks", async (req, res) => {
   try {
-    console.log("Incoming body:", req.body); // Debug log
     const { title } = req.body;
     if (!title) return res.status(400).json({ error: "Title is required" });
 
@@ -41,7 +39,7 @@ app.post("/tasks", async (req, res) => {
   }
 });
 
-// ✅ PUT update task
+// PUT update task
 app.put("/tasks/:id", async (req, res) => {
   try {
     const task = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -52,7 +50,7 @@ app.put("/tasks/:id", async (req, res) => {
   }
 });
 
-// ✅ DELETE task
+// DELETE task
 app.delete("/tasks/:id", async (req, res) => {
   try {
     const task = await Task.findByIdAndDelete(req.params.id);
@@ -63,10 +61,10 @@ app.delete("/tasks/:id", async (req, res) => {
   }
 });
 
-// ✅ Connect to MongoDB and start server
+// Connect to MongoDB and start server
 (async () => {
   try {
-    console.log("Mongo URI:", process.env.MONGO_URI); // Debug log
+    console.log("Mongo URI:", process.env.MONGO_URI);
     await mongoose.connect(process.env.MONGO_URI);
     console.log("✅ MongoDB connected");
 
